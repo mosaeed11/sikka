@@ -1,0 +1,19 @@
+-- الملف ده: شكل جداول Supabase المطلوبة للـ MVP (وصف بس، التنفيذ على الليدر).
+-- اللي هيشتغل هنا: ينفذ الجداول دي من Supabase Dashboard > SQL Editor.
+--
+-- الجداول المطلوبة:
+-- 1) profiles: بيانات اليوزر (id + full_name + phone + role + rating + status)
+-- 2) captain_applications: ورق الكابتن (بطاقة + رخص + عربية + status pending/approved/...)
+-- 3) vehicles: بيانات العربية (brand + model + year + plate + max_seats)
+-- 4) rides: الرحلات (from/to lat-lng + depart_at + seats + price + status)
+-- 5) ride_requests: الطلبات (ride_id + passenger + pickup/dropoff + status + expires_at للـ 10 ثواني)
+-- 6) payments: الدفع (amount + method cash/electronic + commission + confirmed_by الكابتن)
+-- 7) captain_balances: مديونية الكابتن (outstanding)
+-- 8) ratings: التقييمات (stars + comment)
+-- 9) notifications: الإشعارات (title + body + type + read)
+-- 10) app_config: ثوابت الأسعار (per_km صيف/شتا + incentive + commission)
+--
+-- Storage المطلوب: bucket اسمه avatars (public) + bucket اسمه captain_docs (private)
+-- Admin: من Supabase Studio > Table Editor (توافق على الكباتن + تشوف المديونيات)
+
+-- TODO: اكتب SQL الجداول هنا
