@@ -1,4 +1,42 @@
-// الملف ده: ويدجت تحميل مشترك (Spinner + رسالة).
-// بتستخدمه أي شاشة وهي مستنية رد من Supabase بدل ما كل واحد يعمل loading لوحده.
+import 'package:flutter/material.dart';
+import '../theme/app_theme.dart';
 
-// TODO: اعمل StatelessWidget فيها CircularProgressIndicator
+class LoadingView extends StatelessWidget {
+  final String? message;
+  final Color? color;
+
+  const LoadingView({
+    super.key,
+    this.message,
+    this.color,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          CircularProgressIndicator(
+            strokeWidth: 3.0,
+            valueColor: AlwaysStoppedAnimation<Color>(
+              color ?? AppColors.brandIndigo,
+            ),
+          ),
+          if (message != null) ...[
+            const SizedBox(height: AppSpacing.s16),
+            Text(
+              message!,
+              style: const TextStyle(
+                fontSize: 14,
+                color: AppColors.textMuted,
+                fontWeight: FontWeight.w500,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+}
