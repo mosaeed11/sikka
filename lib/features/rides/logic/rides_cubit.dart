@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -118,104 +119,68 @@ class TrackDriverState {
 class TrackDriverCubit extends Cubit<TrackDriverState> {
   TrackDriverCubit() : super(TrackDriverState());
 
-  void clickBack(BuildContext context) {
-    if (Navigator.canPop(context)) {
-      Navigator.pop(context);
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('رجوع للخلف', textAlign: TextAlign.center),
-          duration: Duration(seconds: 1),
-        ),
-      );
-    }
-  }
+  void clickBack(BuildContext context) {}
 
-  void clickHelp(BuildContext context) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('مركز الدعم والمساعدة في الرحلة', textAlign: TextAlign.center),
-        duration: Duration(seconds: 1),
-      ),
-    );
-  }
+  void clickHelp(BuildContext context) {}
 
   void changeStage(int stageIndex) {
     emit(state.copyWith(currentStage: stageIndex));
   }
 
-  void confirmAllOnboard(BuildContext context) {
-    final updatedList = state.passengers.map((p) {
-      return p.copyWith(status: PassengerStatus.onboard);
-    }).toList();
+  void confirmAllOnboard(BuildContext context) {}
 
-    emit(state.copyWith(
-      passengers: updatedList,
-      currentStage: 1,
-    ));
+  void confirmArrivedAtPickup(BuildContext context) {}
 
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('تم تأكيد ركوب الجميع وبدأت الرحلة!', textAlign: TextAlign.center),
-        backgroundColor: Color(0xFF16A34A),
-        duration: Duration(seconds: 2),
-      ),
-    );
-  }
+  void markOnboard(String passengerId) {}
 
-  void confirmArrivedAtPickup(BuildContext context) {
-    emit(state.copyWith(arrivedAtPickup: true));
+  void markDroppedOff(String passengerId) {}
 
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('تم تأكيد الوصول عند نقطة المقابلة بنجاح', textAlign: TextAlign.center),
-        backgroundColor: Color(0xFF3525CD),
-        duration: Duration(seconds: 2),
-      ),
-    );
-  }
-
-  void markOnboard(String passengerId) {
-    final updatedList = state.passengers.map((p) {
-      if (p.id == passengerId) {
-        return p.copyWith(status: PassengerStatus.onboard);
-      }
-      return p;
-    }).toList();
-
-    emit(state.copyWith(passengers: updatedList));
-  }
-
-  void markDroppedOff(String passengerId) {
-    final updatedList = state.passengers.map((p) {
-      if (p.id == passengerId) {
-        return p.copyWith(status: PassengerStatus.droppedOff);
-      }
-      return p;
-    }).toList();
-
-    emit(state.copyWith(passengers: updatedList));
-  }
-
-  void togglePassengerStatus(String passengerId) {
-    final updatedList = state.passengers.map((p) {
-      if (p.id == passengerId) {
-        final nextStatus = p.status == PassengerStatus.waiting
-            ? PassengerStatus.onboard
-            : (p.status == PassengerStatus.onboard
-                ? PassengerStatus.droppedOff
-                : PassengerStatus.waiting);
-        return p.copyWith(status: nextStatus);
-      }
-      return p;
-    }).toList();
-
-    emit(state.copyWith(passengers: updatedList));
-  }
+  void togglePassengerStatus(String passengerId) {}
 }
 
 class DriverLocationCubit extends Cubit<bool> {
   DriverLocationCubit() : super(false);
 
   void toggleSharing() => emit(!state);
+}
+
+class MyRidesState extends Equatable {
+  final int selectedTab;
+
+  const MyRidesState({
+    this.selectedTab = 0,
+  });
+
+  MyRidesState copyWith({
+    int? selectedTab,
+  }) {
+    return MyRidesState(
+      selectedTab: selectedTab ?? this.selectedTab,
+    );
+  }
+
+  @override
+  List<Object?> get props => [selectedTab];
+}
+
+class MyRidesCubit extends Cubit<MyRidesState> {
+  MyRidesCubit() : super(const MyRidesState());
+
+  void changeTab(int index) {
+    emit(state.copyWith(selectedTab: index));
+  }
+
+  void retryConnection(BuildContext context) {}
+
+  void checkMobileSettings(BuildContext context) {}
+
+  void serverRetry(BuildContext context) {}
+
+  void contactSupport(BuildContext context) {}
+
+  void findNewRide(BuildContext context) {}
+
+  void goBack(BuildContext context) {}
+
+  void openProfile(BuildContext context) {}
 }

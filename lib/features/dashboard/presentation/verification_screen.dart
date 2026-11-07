@@ -319,9 +319,7 @@ class _VerificationScreenViewState extends State<_VerificationScreenView> {
             icon: menuItems[i]['icon'] is IconData
                 ? menuItems[i]['icon'] as IconData
                 : null,
-            iconWidget: menuItems[i]['icon'] is Widget
-                ? menuItems[i]['icon'] as Widget
-                : null,
+            iconBuilder: (selected, hovered) => menuItems[i]['icon'] is Widget ? (menuItems[i]['icon'] as Widget) : const SizedBox(),
             label: menuItems[i]['label'] as String?,
             onTap: () => cubit.changeNavIndex(context, i),
           ),

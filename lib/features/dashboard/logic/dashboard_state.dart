@@ -5,14 +5,32 @@ class DashboardState {
   final bool isArabic;
   final int selectedApplicantIndex;
   final int verificationTab;
+  final bool isHeatmapEnabled;
+  final int liveRideFilterIndex;
+  final int liveRidePage;
+  final int ridesTab;
+  final String corridorSearchQuery;
+  final String selectedCorridorFilter;
+  final String selectedPaymentFilter;
+  final bool isDeviationFilterOnly;
+  final int ridesCurrentPage;
 
   DashboardState({
-    this.selectedNavIndex = 5,
+    this.selectedNavIndex = 0,
     this.debtorFilterIndex = 0,
     this.searchQuery = '',
     this.isArabic = false,
     this.selectedApplicantIndex = 0,
     this.verificationTab = 0,
+    this.isHeatmapEnabled = false,
+    this.liveRideFilterIndex = 0,
+    this.liveRidePage = 1,
+    this.ridesTab = 0,
+    this.corridorSearchQuery = '',
+    this.selectedCorridorFilter = 'All',
+    this.selectedPaymentFilter = 'All',
+    this.isDeviationFilterOnly = false,
+    this.ridesCurrentPage = 1,
   });
 
   DashboardState copyWith({
@@ -22,6 +40,15 @@ class DashboardState {
     bool? isArabic,
     int? selectedApplicantIndex,
     int? verificationTab,
+    bool? isHeatmapEnabled,
+    int? liveRideFilterIndex,
+    int? liveRidePage,
+    int? ridesTab,
+    String? corridorSearchQuery,
+    String? selectedCorridorFilter,
+    String? selectedPaymentFilter,
+    bool? isDeviationFilterOnly,
+    int? ridesCurrentPage,
   }) {
     return DashboardState(
       selectedNavIndex: selectedNavIndex ?? this.selectedNavIndex,
@@ -31,6 +58,18 @@ class DashboardState {
       selectedApplicantIndex:
           selectedApplicantIndex ?? this.selectedApplicantIndex,
       verificationTab: verificationTab ?? this.verificationTab,
+      isHeatmapEnabled: isHeatmapEnabled ?? this.isHeatmapEnabled,
+      liveRideFilterIndex: liveRideFilterIndex ?? this.liveRideFilterIndex,
+      liveRidePage: liveRidePage ?? this.liveRidePage,
+      ridesTab: ridesTab ?? this.ridesTab,
+      corridorSearchQuery: corridorSearchQuery ?? this.corridorSearchQuery,
+      selectedCorridorFilter:
+          selectedCorridorFilter ?? this.selectedCorridorFilter,
+      selectedPaymentFilter:
+          selectedPaymentFilter ?? this.selectedPaymentFilter,
+      isDeviationFilterOnly:
+          isDeviationFilterOnly ?? this.isDeviationFilterOnly,
+      ridesCurrentPage: ridesCurrentPage ?? this.ridesCurrentPage,
     );
   }
 }
